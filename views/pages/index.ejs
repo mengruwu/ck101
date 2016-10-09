@@ -5,25 +5,30 @@
 </head>
 
 <body>
-  <div class="container">
-    <div id="containerImg">
-    </div>
-  </div>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
+  <div class="container" id="containerImg">
+  </div>
+  
   <script type="text/javascript">  
-    var socket = io.connect();    
+    var socket = io.connect();  
     socket.on('putImg',function(data) {
-      var a = document.createElement("a");
-      a.href = data.url;
-      a.target="_blank"
-      var img = document.createElement("img");
-      img.src = data.src;
-      img.className = "materialboxed";
-      img.style="width:250;"
-      a.appendChild(img);
-      document.getElementById("containerImg").appendChild(a);
+      if (data.src.length>0) {
+        var div = document.createElement('div');
+        console.log(data.src.length);
+        for (var i = 0; i < data.src.length; i++) {
+          var a = document.createElement('a');
+          a.href = data.url;
+          a.className = 'carousel-item';
+          var img = document.createElement("img");
+          img.src = data.src[i];
+          a.appendChild(img);
+          div.appendChild(a);
+        }
+        document.getElementById("containerImg").appendChild(div);
+        $('.carousel').carousel();
+      }
     });
   </script>
 

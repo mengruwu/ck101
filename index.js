@@ -35,11 +35,21 @@ io.sockets.on('connection', function(socket){
 				request(url, function (err, res, body) {
 					if (err) throw new Error(err);
 					var $ = cheerio.load(body);
-					$('div.mbn img').each(function (index, element) {
+					var imgurls = [];
+					$('.mbn img').each(function (index, element) {
 						var imgurl = $(this).attr('file');
-						socket.emit('putImg',{'url' : url , 'src':imgurl});
-						if (index >= 8) { console.log(index); return false;}
+						if (imgurl!=null)imgurls.push(imgurl);
+						if (index > 5) {return false;}
 					});
+					if (imgurls.length==0) {
+						$('td.t_f img').each(function (index, element) {
+							var imgurl = $(this).attr('file');
+
+							if (imgurl!=null)imgurls.push(imgurl);
+							if (index > 5) {return false;}
+						});
+					}
+					if(imgurls.length>=5)socket.emit('putImg',{'url' : url , 'src':imgurls});
 				});	
 			})(url);
 		}
