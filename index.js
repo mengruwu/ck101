@@ -39,17 +39,17 @@ io.sockets.on('connection', function(socket){
 					$('.mbn img').each(function (index, element) {
 						var imgurl = $(this).attr('file');
 						if (imgurl!=null)imgurls.push(imgurl);
-						if (index > 5) {return false;}
+						if (index > 20) {return false;}
 					});
 					if (imgurls.length==0) {
 						$('td.t_f img').each(function (index, element) {
 							var imgurl = $(this).attr('file');
 
 							if (imgurl!=null)imgurls.push(imgurl);
-							if (index > 5) {return false;}
+							if (index > 20) {return false;}
 						});
 					}
-					if(imgurls.length>=5)socket.emit('putImg',{'url' : url , 'src':imgurls});
+					if(imgurls.length)socket.emit('putImg',{'url' : url , 'src':imgurls});
 				});	
 			})(url);
 		}
