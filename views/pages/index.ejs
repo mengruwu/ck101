@@ -16,6 +16,7 @@
     socket.on('putImg',function(data) {
       if (data.src.length>0) {
         var div = document.createElement('div');
+        div.className = 'carousel';
         console.log(data.src.length);
         for (var i = 0; i < data.src.length; i++) {
           var a = document.createElement('a');
