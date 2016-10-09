@@ -5,36 +5,25 @@
 </head>
 
 <body>
-  <div id="containerImg">
+  <div class="container">
+    <div id="containerImg">
+    </div>
   </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript">    
-    var lastOne;
-    var socket = io.connect();
-    socket.on('a',function(data) {
-      console.log(data);
-      //socket.emit('b',"");
-    });
-    socket.on('c',function(data) {
-      // body...
+  <script type="text/javascript">  
+    var socket = io.connect();    
+    socket.on('putImg',function(data) {
       var a = document.createElement("a");
       a.href = data.url;
       a.target="_blank"
-      var elem = document.createElement("img");
-      elem.src = data.src;
-      elem.className = "img-rounded";
-      elem.style="width:20vw;"
-      a.appendChild(elem);
+      var img = document.createElement("img");
+      img.src = data.src;
+      img.className = "materialboxed";
+      img.style="width:250;"
+      a.appendChild(img);
       document.getElementById("containerImg").appendChild(a);
-    });
-    socket.on('d',function(data) {
-      lastOne = data;
-    });
-    $(window).scroll(function() {
-     if($(window).scrollTop() + $(window).height() == $(document).height()) {
-         console.log(lastOne);
-        //socket.emit('b','&before='+lastOne);
-     }
     });
   </script>
 
