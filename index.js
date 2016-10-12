@@ -23,7 +23,7 @@ var urls = [];
 var io = socket_io.listen(httpServer);
 io.sockets.on('connection', function(socket){
 	socket.on('newpage',function(data){
-		console.log(data.pages);
+		//console.log(data.pages);
 		request('http://ck101.com/forum-'+data.url+'-'+data.pages+'.html', function (err, res, body) {
 			if (err) throw new Error(err);
 			var $ = cheerio.load(body);
@@ -31,7 +31,7 @@ io.sockets.on('connection', function(socket){
 				var url = $(this).attr('href');
 				urls.push(url);
 			});
-			console.log('['+urls.length+']');
+			//console.log('['+urls.length+']');
 			for (var i = 0; i < urls.length; i++) {
 				var url = urls[i];
 				(function(url){
@@ -42,16 +42,16 @@ io.sockets.on('connection', function(socket){
 						$('.mbn img').each(function (index, element) {
 							var imgurl = $(this).attr('file');
 							if (imgurl!=null)imgurls.push(imgurl);
-							if (index > 10) {return false;}
+							if (index > 7) {return false;}
 						});
 						if (imgurls.length==0) {
 							$('td.t_f img').each(function (index, element) {
 								var imgurl = $(this).attr('file');
 								if (imgurl != null)imgurls.push(imgurl);
-								if (index > 10) {return false;}
+								if (index > 7) {return false;}
 							});
 						}
-						if(imgurls.length >= 5)socket.emit('putImg',{'url' : url , 'src':imgurls});
+						if(imgurls.length >= 3)socket.emit('putImg',{'url' : url , 'src':imgurls});
 					});	
 				})(url);
 			}

@@ -9,21 +9,23 @@
   <script type="text/javascript" src="js/materialize.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
 
-   <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Ck101 Beauty</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#" onclick="start('3581')">Taiwan</a></li>
-        <li><a href="#" onclick="start('3582')">Korea+Japan</a></li>
-        <li><a href="#" onclick="start('3583')">China+Hongkong</a></li>
-      </ul>
-    </div>
-  </nav>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Ck101 Beauty</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="#" style="text-decoration:none;" onclick="start('3581')">Taiwan</a></li>
+          <li><a href="#" style="text-decoration:none;" onclick="start('3582')">Korea+Japan</a></li>
+          <li><a href="#" style="text-decoration:none;" onclick="start('3583')">China+Hongkong</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 
-  <div  id="containerImg"></div>
+  <div id="containerImg"></div>
 
-  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red tooltipped" id="start" onclick="nextpage()" data-position="left" data-delay="50" data-tooltip="Next Page">
+  <div class="fixed-action-btn" style="bottom: 45px; right: 30px;">
+    <a class="btn-floating btn-large red" onclick="nextpage()">
       <i class="large material-icons">play_arrow</i>
     </a>
   </div>
