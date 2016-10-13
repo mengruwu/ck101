@@ -52,6 +52,7 @@ io.sockets.on('connection', function(socket){
 							});
 						}
 						if(imgurls.length >= 3)socket.emit('putImg',{'url' : url , 'src':imgurls});
+						imgurls = [];
 					});	
 				})(url);
 			}

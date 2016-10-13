@@ -14,9 +14,11 @@
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">Ck101 Beauty</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="#" style="text-decoration:none;" onclick="start('3581')">Taiwan</a></li>
-          <li><a href="#" style="text-decoration:none;" onclick="start('3582')">Korea+Japan</a></li>
-          <li><a href="#" style="text-decoration:none;" onclick="start('3583')">China+Hongkong</a></li>
+          <li><a href="#" size='9' style="text-decoration:none;" onclick="start('3581')">Taiwan</a></li>
+          <li><a href="#" size='9' style="text-decoration:none;" onclick="start('3582')">Korea+Japan</a></li>
+          <li><a href="#" size='9' style="text-decoration:none;" onclick="start('3583')">China+Hongkong</a></li>
+          <li><a href="#" size='9' style="text-decoration:none;" onclick="start('3584')">SouthEast Asia</a></li>
+          <li><a href="#" size='9' style="text-decoration:none;" onclick="start('3345')">EU+USA</a></li>
         </ul>
       </div>
     </nav>
@@ -37,17 +39,7 @@
     var socket = io.connect();
     var pages;
     var nowUrl;
-    /*var options = [
-      {
-        selector: '#containerImg',
-        offset: 0,
-        callback: function(){
-          socket.emit('newpage',{});
-        }
-      }
-    ]; 
-    Materialize.scrollFire(options); 
-    */
+
     function start(url) {
       pages = 1;
       nowUrl = url;
