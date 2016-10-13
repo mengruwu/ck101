@@ -14,11 +14,12 @@
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">Ck101 Beauty</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="#" size='9' style="text-decoration:none;" onclick="start('3581')">Taiwan</a></li>
-          <li><a href="#" size='9' style="text-decoration:none;" onclick="start('3582')">Korea+Japan</a></li>
-          <li><a href="#" size='9' style="text-decoration:none;" onclick="start('3583')">China+Hongkong</a></li>
-          <li><a href="#" size='9' style="text-decoration:none;" onclick="start('3584')">SouthEast Asia</a></li>
-          <li><a href="#" size='9' style="text-decoration:none;" onclick="start('3345')">EU+USA</a></li>
+          <li><a href="#" style="text-decoration:none;" onclick="startck101('3581')">Taiwan</a></li>
+          <li><a href="#" style="text-decoration:none;" onclick="startck101('3582')">Korea+Japan</a></li>
+          <li><a href="#" style="text-decoration:none;" onclick="startck101('3583')">China+Hongkong</a></li>
+          <li><a href="#" style="text-decoration:none;" onclick="startck101('3584')">SouthEast Asia</a></li>
+          <li><a href="#" style="text-decoration:none;" onclick="startck101('3345')">EU+USA</a></li>
+          <li><a href="#" style="text-decoration:none;" onclick="startptt()">PTT</a></li>
         </ul>
       </div>
     </nav>
@@ -34,22 +35,30 @@
 
   <script type="text/javascript">
     $(document).ready(function(){
-      start('3581');
+      startck101('3581');
     });  
     var socket = io.connect();
     var pages;
     var nowUrl;
-
-    function start(url) {
+    var sorts;
+    function startck101(url) {
       pages = 1;
       nowUrl = url;
+      sorts = 'ck101';
       document.getElementById("containerImg").innerHTML = '';
-      socket.emit('newpage',{url : url, pages: pages});
+      socket.emit('newpage',{url : url, pages: pages, sorts:sorts});
+    }
+
+    function startptt() {
+      sorts = 'ptt';
+      pages = 1;
+      document.getElementById("containerImg").innerHTML = '';
+      socket.emit('newpage',{pages: pages, sorts: sorts});
     }
 
     function nextpage() {
       pages+=1;
-      socket.emit('newpage',{url : nowUrl, pages: pages});
+      socket.emit('newpage',{url : nowUrl, pages: pages, sorts: sorts});
     }
     socket.on('putImg',function(data) {
       //if (data.src.length>0) {
