@@ -100,6 +100,37 @@ io.sockets.on('connection', function(socket){
 				}
 				urls = [];
 			});
+		}
+		else if (data.sorts == 'jkf') {
+			request('http://www.jkforum.net/forum-520-'+data.pages+'.html', function (err, res, body) {
+				if (err) throw new Error(err);
+				var $ = cheerio.load(body);
+				$('div.c.cl a').each(function () {
+					var url = $(this).attr('href');
+					urls.push(url);
+				});
+				for (var i = 0; i < urls.length; i++) {
+					var url = 'http://www.jkforum.net/'+urls[i];console.log(url);
+					(function(url){
+						request(url, function (err, res, body) {
+							if (err) throw new Error(err);
+							var $ = cheerio.load(body);
+							var imgurls = [];
+							var string;
+							$('td.t_f > ignore_js_op').each(function (index, element) {
+								if (index >= 5) {return false;}
+								var imgurl = $(this).children('img').attr('file');
+								if (imgurl != null && imgurl.endsWith('.jpg')) {
+									imgurls.push(imgurl);//console.log(imgurl);
+								}
+							});
+							if(imgurls.length >= 3)socket.emit('putImg',{'url' : url , 'src':imgurls});
+							imgurls = [];
+						});	
+					})(url);
+				}
+				urls = [];
+			});
 		}  
 	});		
 });

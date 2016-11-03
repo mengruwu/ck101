@@ -20,6 +20,7 @@
           <li><a href="#" style="text-decoration:none;" onclick="startck101('3584')">SouthEast Asia</a></li>
           <li><a href="#" style="text-decoration:none;" onclick="startck101('3345')">EU+USA</a></li>
           <li><a href="#" style="text-decoration:none;" onclick="startptt()">PTT</a></li>
+          <li><a href="#" style="text-decoration:none;" onclick="startjkf()">JKF</a></li>
         </ul>
       </div>
     </nav>
@@ -51,6 +52,13 @@
 
     function startptt() {
       sorts = 'ptt';
+      pages = 1;
+      document.getElementById("containerImg").innerHTML = '';
+      socket.emit('newpage',{pages: pages, sorts: sorts});
+    }
+
+    function startjkf() {
+      sorts = 'jkf';
       pages = 1;
       document.getElementById("containerImg").innerHTML = '';
       socket.emit('newpage',{pages: pages, sorts: sorts});
